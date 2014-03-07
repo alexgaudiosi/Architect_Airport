@@ -1,9 +1,21 @@
-# require_relative "../lib/weather"
+require_relative "../lib/weather"
 
-# describe Weather do
+class WeatherWrapper; include Weather; end
 
-# 	it "should generate a random number up to 100" do
-# 		expect
-# 	end
+describe Weather do
 
-# end
+it "should be sunny if over 15" do
+	wrapper = WeatherWrapper.new
+	wrapper.stub(:generator => 80)
+	wrapper.generator.should eq(80)
+	expect(wrapper.sunny?).to be(true)
+	end
+
+it "should be stormy if under 15" do
+	wrapper = WeatherWrapper.new
+	wrapper.stub(:generator => 10)
+	wrapper.generator.should eq(10)
+	expect(wrapper.stormy?).to be(true)
+	end
+
+end
