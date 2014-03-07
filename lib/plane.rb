@@ -1,11 +1,17 @@
+require_relative "airport"
+
 class Plane
 
-	def intialize
-		@plane = plane
+	# def intialize
+	# 	@plane = plane
+	# end
+
+	def flying
+		@flying = true
 	end
 
-	def land
-		planes << plane
+	def grounded
+		@flying = false
 	end
 
 end

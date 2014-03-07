@@ -18,4 +18,9 @@ describe Airport do
 		expect(hanger.plane_count).to eq(0)
 	end
 
+	it "should not accept a plane if full" do
+		50.times do hanger.land(plane) end
+			expect(lambda { hanger.land(plane) }).to raise_error(RuntimeError)
+	end
+
 end
