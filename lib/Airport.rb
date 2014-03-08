@@ -11,14 +11,6 @@ class Airport
  		@planes = []
  	end
 
-	# def initialize
-	# 	@planes = []
-	# end
-
-	# def planes 
-	# 	@planes ||= []
-	# 	end 
-
 	def plane_count
 		@planes.count
 	end
@@ -28,12 +20,17 @@ class Airport
 	end
 
 	def land(plane)
-		raise "Airport is full" if full?
-		@planes << plane
-	end
+		if stormy? && full? 
+			raise "Unable to land."
+				else @planes << plane
+			end
+		end	
 
 	def take_off(plane)
+		if stormy? && full? 
+			raise "Unable to takeoff."
 		@planes.pop
+		end
 	end
 
 	def full?

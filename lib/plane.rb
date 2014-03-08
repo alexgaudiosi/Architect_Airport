@@ -2,11 +2,7 @@ require_relative "airport"
 
 class Plane
 
-	# def intialize
-	# 	@plane = plane
-	# end
-
-	def flying
+	def flying?
 		@flying = true
 	end
 
