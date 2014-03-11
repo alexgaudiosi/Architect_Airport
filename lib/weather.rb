@@ -5,11 +5,11 @@ module Weather
 	end
 
 	def sunny?
-		generator >= 15
+		generator >= 21
 	end
 
-	def stormy?()
-		generator < 15
+	def stormy?
+		generator < 20
 	end
 
 end

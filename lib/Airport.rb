@@ -4,7 +4,7 @@ class Airport
 
 	include Weather
 
-	DEFAULT_CAPACITY = 50
+	DEFAULT_CAPACITY = 10
 
  	def initialize(arg = {})
  		@capacity = arg[:capacity] || DEFAULT_CAPACITY
@@ -19,22 +19,27 @@ class Airport
 		@capacity ||= DEFAULT_CAPACITY
 	end
 
-	def land(plane)
-		if stormy? && full? 
-			raise "Unable to land."
-				else @planes << plane
-			end
-		end	
-
-	def take_off(plane)
-		if stormy? && full? 
-			raise "Unable to takeoff."
-		@planes.pop
-		end
-	end
-
 	def full?
 		plane_count == capacity
 	end
 
+	def closed?
+		if stormy? || full?
+			raise "Airport shut"
+		end
+	end
+
+	def land(plane)
+		if !closed? || plane.flying?
+				@planes << plane
+				plane.grounded
+		end
+	end	
+
+	def take_off(plane)
+		if !closed?
+				@planes.delete(plane)
+				plane.flight
+		end
+	end
 end

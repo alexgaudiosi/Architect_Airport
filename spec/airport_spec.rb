@@ -21,19 +21,18 @@ describe Airport do
 	end
 
 	it "should not accept a plane if full" do
-		50.times do hanger.land(plane) end
-			expect(lambda { hanger.land(plane) }).to raise_error(RuntimeError)
+		10.times do hanger.land(plane) end
+		expect(lambda { hanger.land(plane) }).to raise_error(RuntimeError)
 	end
 
 	it "should allow planes to land when sunny" do
-		weather = double :weather, {:sunny? => true	}
-		hanger.take_off(plane)
+		hanger.stub(:sunny? => true)
 		hanger.land(plane)
 		expect(hanger.plane_count).to eq(1)
 	end
 
 		it "should allow planes to take off when sunny" do
-		weather = double :weather, {:sunny? => true	}
+		hanger.stub(:sunny? => true)
 		hanger.take_off(plane)
 		expect(hanger.plane_count).to eq(0)
 	end
