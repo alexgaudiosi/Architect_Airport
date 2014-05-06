@@ -1,22 +1,52 @@
-Why does the plane need to require airport?
+Airport
+=======
 
-In the land method you don't tell the plane to land
+### Makers Academy Week 3 - Test
 
-Think about using
+This test was set by Enrique Comba Riepenhausen
+[@ecomba](http://twitter.com/ecomba) and Alex Peattie
+[@alexpeattie](https://twitter.com/alexpeattie) whilst learning to code at
+[Makers Academy](http://www.makersacademy.com). The aim was to build an
+object oriented model of airports and planes in Ruby.
 
-```
-raise "Unable to land due to bad weather!" if weather_stormy?
-raise "We are full" if full?
+I wrote this code alone using RSpec for TDD. I started by writing the CRC
+cards (shown below). The primary aim of this test was to write clean, simple,
+readable code. I think the closest I came to this aim was in my Airport class:
 
-```
-rather than
-
-```
-if stormy? && full?
-      raise "Unable to land."
+```ruby
+def closed?
+      if stormy? || full?
+		raise "Airport shut"
+	end
 end
 ```
 
-2 of the tests don't pass!
+After the test specification I completed the first stretch goal to give each
+airport a runway and for planes to taxi to the runway before take off.
 
-# FAIL
+This model could be improved by making the airport's collection of planes into
+a separate `Hanger` class.
+
+#### Class Weather
+
+| Responsibilities            | Collaborators |
+| :-------------------------- | :------------ |
+| can be sunny or stormy      | Airport       |                   
+| can switch state at random  |               |
+
+#### Class Plane
+
+| Responsibilities                                    | Collaborators |
+| :-------------------------------------------------- | :------------ |
+| can land at an Airport, if clear to land            | Airport       |
+| can take off from an Airport, if clear to take off  |               |
+
+#### Class Airport
+
+| Responsibilities                             | Collaborators |
+| :------------------------------------------- | :------------ |
+| has a maximum capacity of Planes             | Plane         |
+| has a collection of Planes                   | Weather       |
+| has its own Weather                          |               |
+| can be clear for take offs and landings      |               |
+| (i.e. has space, not stormy)                 |               |
